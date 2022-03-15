@@ -28,4 +28,9 @@ describe('AnyAPI routes', () => {
     const response = await request(app).get('/api/v1/synths');
     expect(response.body).toEqual(expected);
   });
+  it('grabs a synth by an id', async () => {
+    const expected = await Synth.findById(1);
+    const response = await request(app).get(`/api/v1/synths/${expected.id}`);
+    expect(response.body).toEqual({ ...expected });
+  });
 });

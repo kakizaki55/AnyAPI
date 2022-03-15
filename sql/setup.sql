@@ -13,5 +13,6 @@ DROP TABLE IF EXISTS synths;
 INSERT INTO
   synths (make, model, year)
 VALUES
-  ('moog', 'sub37', 2015);
+  ('moog', 'sub37', 2015),
+  ('korg', 'k2', 2000);
   
