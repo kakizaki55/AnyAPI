@@ -11,4 +11,14 @@ describe('AnyAPI routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('creates a synth', async () => {
+    const expected = {
+      make: 'korg',
+      model: 'some synth',
+      year: 2017,
+    };
+    const res = await request(app).post('/api/v1/synths').send(expected);
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
