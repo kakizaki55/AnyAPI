@@ -33,4 +33,16 @@ describe('AnyAPI routes', () => {
     const response = await request(app).get(`/api/v1/synths/${expected.id}`);
     expect(response.body).toEqual({ ...expected });
   });
+  it('updates synth by its ID', async () => {
+    const expected = {
+      id: expect.any(String),
+      make: 'atari',
+      model: 'ian',
+      year: 1991,
+    };
+    const response = await request(app)
+      .patch('/api/v1/synths/1')
+      .send({ make: 'atari', model: 'ian', year: 1991 });
+    expect(response.body).toEqual(expected);
+  });
 });
