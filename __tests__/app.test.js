@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Synth = require('../lib/models/Synth');
 
 describe('AnyAPI routes', () => {
   beforeEach(() => {
@@ -18,7 +19,13 @@ describe('AnyAPI routes', () => {
       model: 'some synth',
       year: 2017,
     };
-    const res = await request(app).post('/api/v1/synths').send(expected);
-    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+    const response = await request(app).post('/api/v1/synths').send(expected);
+    expect(response.body).toEqual({ id: expect.any(String), ...expected });
+  });
+
+  it('gets a list of synths', async () => {
+    const expected = await Synth.findAll();
+    const response = await request(app).get('/api/v1/synths');
+    expect(response.body).toEqual(expected);
   });
 });
