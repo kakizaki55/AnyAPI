@@ -53,4 +53,9 @@ describe('AnyAPI routes', () => {
 
     expect(response.body).toEqual(expected);
   });
+  it('will throw and error if no synth is found', async () => {
+    const res = await request(app).get('/api/v1/synths/no-real-id');
+
+    expect(res.status).toEqual(404);
+  });
 });
